@@ -1,88 +1,70 @@
-// Example questions
-const questions = [
-    {
-        question: "What is the capital of France?",
-        options: ["Paris", "Berlin", "Madrid", "Rome"],
-        correctAnswer: "Paris"
-    },
-    {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Jupiter", "Saturn"],
-        correctAnswer: "Mars"
-    },
-    {
-        question: "What is 2 + 2?",
-        options: ["3", "4", "5", "6"],
-        correctAnswer: "4"
-    }
-];
-
-// Store the user answers
-let userAnswers = [];
-
-// Login function
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    
-    if (username === 'admin' && password === 'admin123') {
-        document.getElementById('login-form').style.display = 'none';
-        loadExam();
-    } else {
-        document.getElementById('error-message').innerText = 'Invalid username or password';
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-// Load the questions for the exam
-function loadExam() {
-    const questionContainer = document.getElementById('question-container');
-    questionContainer.innerHTML = '';  // Clear any previous questions
-
-    questions.forEach((question, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.innerHTML = `
-            <p>${question.question}</p>
-            ${question.options.map(option => `
-                <label>
-                    <input type="radio" name="question-${index}" value="${option}">
-                    ${option}
-                </label><br>
-            `).join('')}
-        `;
-        questionContainer.appendChild(questionDiv);
-    });
-
-    // Show the exam page and hide the login page
-    document.getElementById('exam-page').style.display = 'block';
+#app {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
 }
 
-// Submit the exam and calculate results
-function submitExam() {
-    let score = 0;
-    
-    questions.forEach((question, index) => {
-        const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
-        
-        if (selectedOption) {
-            userAnswers[index] = selectedOption.value;
-            if (userAnswers[index] === question.correctAnswer) {
-                score++;
-            }
-        }
-    });
-
-    // Display the results
-    document.getElementById('exam-page').style.display = 'none';
-    document.getElementById('results-page').style.display = 'block';
-    document.getElementById('results').innerText = `You scored ${score} out of ${questions.length}`;
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-// Logout function
-function logout() {
-    // Reset user data
-    userAnswers = [];
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-    // Show login form again
-    document.getElementById('results-page').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
+button:hover {
+    background-color: #0056b3;
+}
+
+.question-entry {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+#dashboard {
+    text-align: center;
+}
+
+#exam-list {
+    margin-top: 20px;
+}
+
+.exam-item {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.exam-item:hover {
+    background-color: #e9ecef;
 }

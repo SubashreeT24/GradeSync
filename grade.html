@@ -2,37 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCQ Exam Management System</title>
+    <title>Exam Management System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Login Form -->
-    <div id="login-form">
-        <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <div id="error-message"></div>
-    </div>
+    <div id="app">
+        <div id="auth-container">
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="login()">Login</button>
+                <p onclick="showRegister()">Create an Account</p>
+            </div>
 
-    <!-- Exam Page -->
-    <div id="exam-page" style="display: none;">
-        <h2>MCQ Exam</h2>
-        <div id="question-container">
-            <!-- Questions will be loaded here -->
+            <div id="register-form" style="display:none;">
+                <h2>Register</h2>
+                <input type="text" id="reg-username" placeholder="Username">
+                <input type="email" id="reg-email" placeholder="Email">
+                <input type="password" id="reg-password" placeholder="Password">
+                <select id="user-role">
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                </select>
+                <button onclick="register()">Register</button>
+                <p onclick="showLogin()">Already have an account?</p>
+            </div>
         </div>
-        <button onclick="submitExam()">Submit Exam</button>
-    </div>
 
-    <!-- Results Page -->
-    <div id="results-page" style="display: none;">
-        <h2>Exam Results</h2>
-        <p id="results"></p>
-        <button onclick="logout()">Logout</button>
-    </div>
+        <div id="dashboard" style="display:none;">
+            <div id="user-info"></div>
+            <div id="exam-list"></div>
+            
+            <div id="create-exam-section" style="display:none;">
+                <h2>Create New Exam</h2>
+                <input type="text" id="exam-title" placeholder="Exam Title">
+                <textarea id="exam-description" placeholder="Exam Description"></textarea>
+                <input type="number" id="exam-duration" placeholder="Duration (minutes)">
+                
+                <div id="question-container">
+                    <div class="question-entry">
+                        <textarea placeholder="Question Text"></textarea>
+                        <input type="text" placeholder="Option 1">
+                        <input type="text" placeholder="Option 2">
+                        <input type="text" placeholder="Option 3">
+                        <input type="text" placeholder="Option 4">
+                        <select class="correct-option">
+                            <option value="0">Option 1</option>
+                            <option value="1">Option 2</option>
+                            <option value="2">Option 3</option>
+                            <option value="3">Option 4</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button onclick="addQuestionField()">Add Question</button>
+                <button onclick="submitExam()">Create Exam</button>
+            </div>
 
-    <script src="script.js"></script>
+            <div id="take-exam-section" style="display:none;">
+                <h2 id="exam-title-display"></h2>
+                <div id="exam-questions"></div>
+                <button onclick="submitExamAnswers()">Submit Exam</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>
-
